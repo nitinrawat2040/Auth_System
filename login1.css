@@ -1,0 +1,95 @@
+#container {
+    background-color:burlywood;
+    height:97vh;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+}
+
+#box {
+    height: 550px;
+    width: 500px;
+    background-color:steelblue;
+    border: 1px solid black;
+    box-shadow: 4px 4px 8px;
+    padding:12px;
+}
+
+#signUp {
+    font-weight: bold;
+    font-size: 24px;
+    text-align:center;
+}
+
+#fname {
+    border-radius: 5px;
+
+}
+
+#Lname {
+    border-radius: 5px;
+}
+#name-row {
+    display: flex;
+    gap:20px;
+    
+}
+
+#field {
+    display:flex;
+    flex-direction: column;
+}
+
+#address {
+    width:90%;
+    border-radius: 2px;
+}
+
+#location-row {
+    display:flex;
+    gap:30px;
+}
+
+#field1 {
+    flex:6;
+}
+
+#field2 {
+    flex:4;
+}
+
+#landmark {
+    border-radius: 2px;
+    width: 100%;
+}
+
+#pincode {
+    border-radius: 2px;
+}
+
+#email {
+    border-radius: 2px;
+    width: 60%;
+}
+
+#number {
+    border-radius: 2px;
+}
+
+#password {
+    border-radius: 2px;
+}
+
+#Confirm_password {
+    border-radius: 2px;
+}
+
+#SignUp {
+    height:30px;
+    width:70px;
+    position: relative;
+    left: 230px;
+    top:30px;
+   
+}

@@ -1,0 +1,59 @@
+.div1 {
+    
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 97vh;           /* full viewport height */
+    margin: 0;
+    background-color:burlywood;
+}
+
+#p1 {  
+    
+    font-weight:bold;
+    font-size: 25px;
+    text-align:center;
+}
+
+.box {
+    background-color:steelblue;
+    height: 320px;
+    width:450px;
+    /* border-radius: 10px; */
+    box-shadow: 4px 4px 8px;
+    padding: 15px;
+    border: 1px solid black;
+}
+#fname {
+    border-radius: 5px;
+}
+
+#security {
+    border-radius: 5px;
+}
+
+#number {
+    border-radius: 5px;
+}
+
+#verify {
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.center {
+    text-align:center;
+    padding:20px;
+
+}
+
+#loginBtn {
+    width:80px;
+    height: 30px;
+    text-align: center;
+    border-radius:5px;
+    
+}
