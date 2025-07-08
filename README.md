@@ -14,28 +14,35 @@ This project is a basic **authentication system** that allows users to sign up a
 ## 🛠️ Technologies Used
 
 - HTML & CSS
-- JavaScript (Vanilla)
+- JavaScript
 - Node.js
 - Express.js
-- SQL (MySQL or PostgreSQL)
-- API Integration for sending OTP (e.g., Fast2SMS)
+- SQL (MySQL)
+- API Integration for sending OTP (Fast2SMS)
 
 ## 📂 Project Structure
 
 Project1/
-├── public/
-│ ├── index.html
-│ └── styles.css
-├── server.js
-├── routes/
-│ └── auth.js
 ├── controllers/
-│ └── otpController.js
+│   ├── authController.js
+│   └── otpController.js
 ├── database/
-│ └── db.js
+│   └── db.js
+├── node_modules/
+├── public/
+│   ├── login.css
+│   ├── login.html
+│   ├── login1.css
+│   └── login1.html
+├── routes/
+│   └── authRoutes.js
 ├── .env
 ├── .gitignore
-└── README.md
+├── package.json
+├── package-lock.json
+├── README.md
+└── server.js
+
 
 ## 🚀 How to Run
 
