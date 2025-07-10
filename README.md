@@ -17,7 +17,7 @@ This project is a basic **authentication system** that allows users to sign up a
 - JavaScript
 - Node.js
 - Express.js
-- SQL (MySQL)
+- SQL 
 - API Integration for sending OTP (Fast2SMS)
 
 ## 📂 Project Structure
