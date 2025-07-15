@@ -3,64 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login page 2 </title>
+    <title>Document</title>
     <link rel="stylesheet" href="login1.css">
 </head>
 <body>
-    
-    <div id ="container">
-        <div id = "box">
-            <p id="signUp"> Sign Up </p>
-         <form id="formId">
+    <div class="div1">
+        <div class = box>
             
-            <div id="name-row">
-              
-                <div id="field">
-            <label for="fname">First Name </label>
-            <input type="text" id="fname" name="Fname">
-            </div>
-            
-              <div id="field">
-                <label for="Lname">Last Name </label>
-            <input type="text" id="Lname" name="Lname">
-              </div>
-            
-            </div>
-            <br>
-            <label for="address">Shipping Address</label><br>
-            <input type="text" id="address" name="address"> 
-            <br><br>
-            
-            <div id="location-row">
-                <div id="field1">
-            <label for="landmark">Landmark</label>
-            <input type="text" id="landmark" name="landmark">
-               </div>
-               <div id="field2">
-            <label for="pincode">Pincode</label>
-            <input type="text" id="pincode" name="pincode">
-             </div>
-            </div>
-            <br>
-            <label for="email">E-mail Address</label><br>
-            <input type="text" id="email" name="email">
-            <br><br>
-            <label for="number">Contact number</label><br>
-            <input type="text" id="number" name="number">
-            <br><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password">
-            <br><br>
-            <label for="Confirm_password">Confirm Password</label><br>
-            <input type="password" id="Confirm_password" name="Confirm_password">
+            <p id="p1">Reset Password</p>
+            <form id="ResetForm">                
+                <label for="number" id="text"> Mobile number</label>
+                <input type="text" id="number" name="phone number">
+                
+                <input type="button" id="sendOtpBtn" value="Send OTP" name="verify"><br><br>
+                
+                <label for="otp" id="text">OTP </label>
+                <input type="text" id="otp" placeholder="Enter OTP" name="otp">
+                
+                <button id="verifyOtpBtn"> Verify OTP </button>    
+                <p id="cooldownMsg"></p>
+                <br><br>
 
-            <br><br>
-            <button type="button" id="SignUp">Sign Up</button>
-            
-            
-         </form>     
+                <div id="passwordSection" style="display: none;">
+                <label for="secure" id="text" placeholder="Enter new password">New Password</label>
+                <br>
+                <input type="password" id="new_password" name="new_password"><br><br>
+                
+                <label for="secure1" id="text" placeholder="Enter confirm password">Confirm Password</label>
+                <br>
+                <input type="text" id="confirm_password" name="confirm_password"><br><br>
+                 <button type="submit" id="changePasswordBtn">Update Password</button>
+                </div> 
+
+                <div class="center">
+                  <button type="button" id="resetBtn">Reset Password</button>
+                </div>
+                </form>
         </div>
     </div>
-
+     <script src="file.js"></script>
+</body>
+</html>
 </body>
 </html>

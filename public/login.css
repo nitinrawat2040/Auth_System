@@ -5,39 +5,50 @@
     align-items:center;
     height: 97vh;           /* full viewport height */
     margin: 0;
-    background-color:burlywood;
+    background-color:whitesmoke;
 }
-
 #p1 {  
-    
     font-weight:bold;
     font-size: 25px;
     text-align:center;
+    color:black;
+    font-family:'Open Sans', sans-serif;
 }
-
 .box {
-    background-color:steelblue;
-    height: 320px;
-    width:450px;
-    /* border-radius: 10px; */
-    box-shadow: 4px 4px 8px;
+    background-color:lightsteelblue;
+    height: 300px;
+    width:440px;
+    box-shadow: 5px 5px 14px;
     padding: 15px;
     border: 1px solid black;
 }
-#fname {
-    border-radius: 5px;
+#identifier {
+    border-radius: 3px;
+    padding:3px;
+    width:50%;
 }
 
+#text {
+    color:black;
+    font-family:'sans-serif';
+}
+#text1 {
+    color:darkblue;
+    font-weight: bold;
+}
 #security {
-    border-radius: 5px;
+    border-radius: 3px;
+    padding:3px;
+    width:50%;
 }
-
 #number {
-    border-radius: 5px;
+    border-radius: 3px;
+    padding:3px;
 }
 
 #verify {
-    border-radius: 5px;
+    border-radius: 3px;
+    padding:3px;
 }
 
 label {
@@ -51,9 +62,18 @@ label {
 }
 
 #loginBtn {
-    width:80px;
-    height: 30px;
+    width:90px;
+    height: 26px;
     text-align: center;
     border-radius:5px;
+    font-size:18px;
     
+}
+
+#forget {
+    color:darkblue;
+    position:relative;
+    bottom: 34px;
+    left: 325px;
+    font-weight: bold;
 }

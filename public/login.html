@@ -12,91 +12,23 @@
             
             <p id="p1">Login In</p>
             <form id="loginForm">
-                <label for="fname"> Username:-</label>
-                <input type="text" id="fname" name="fname"><br><br>
+                <label for="identifier" id="text"> Email/Mobile</label>
+                <br>
+                <input type="text" id="identifier" name="identifier"><br><br>
                 
-                <label for="security"> Password:-</label>
+                <label for="security" id="text"> Password</label>
+                <br>
                 <input type="password" id="security" name="password"><br><br>
                 
-                <label for="number"> Mobile number:-</label>
-                <input type="text" id="number" name="phone number">
-                
-                <input type="button" id="sendOtpBtn" value="Send OTP" name="verify"><br><br>
-                
-                <label for="otp">OTP: </label>
-                <input type="text" id="otp" placeholder="Enter OTP" name="otp">
-                
-                <button id="verifyOtpBtn"> Verify OTP </button>    
-                
-                <div class="successMsg"></div>
-                
                 <div class="center">
-                  <button type="button" id="loginBtn">Login</button>
+                  <button type="submit" id="loginBtn">Login</button>
                 </div>
             </form>
-            <p>New user? <a href="login1.html">Sign up</a> </p>
+            <p id="text">New user? <a href="login2.html" id="text1">Sign up</a> </p>
+            <a href="login1.html" id="forget">Forget password?</a>
             
         </div>
     </div>
-    <script>
-   let phoneGlobal = "";
-   document.getElementById("sendOtpBtn").addEventListener("click", async (e) => {
-    e.preventDefault();  // ✅ prevent form reload
-
-  const username = document.getElementById("fname").value;
-  const password = document.getElementById("security").value;
-  const phone = document.getElementById("number").value;
-  
-   // 🛡️ Validation
-  if (!username || !password || !phone) {
-    alert("All fields are required!");
-    return;
-  }
-
-  if (!/^\d{10}$/.test(phone)) {
-    alert("Please enter a valid 10-digit mobile number.");
-    return;
-  }
-
-
-  const res = await fetch("http://localhost:5000/send-otp", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, password, phone }),
-  });
-
-  const data = await res.json();
-  if (data.success) {
-    alert(data.message);
-    phoneGlobal = phone;
-  } else {
-    alert(data.message);
-  }
-});
-
-     // Verify OTP button click
-    document.getElementById("verifyOtpBtn").addEventListener("click", async (e) => {
-      e.preventDefault();  // ⛔ missing in your code
-      const otp = document.getElementById("otp").value;
-
-      const res = await fetch("http://localhost:5000/verify-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ phone: phoneGlobal, otp }),
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        alert("Login successful! Redirecting...");
-        window.location.href = "https://www.geeksforgeeks.org/batch/dsa-using-javascript?tab=Chapters";
-      } else {
-        alert("Wrong OTP. Try again.");
-      }
-    });
-    </script>
+    <script src="file.js"></script>
 </body>
 </html>
