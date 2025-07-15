@@ -68,7 +68,7 @@ Project1/
 
 
 3. Set environment variables in .env:
-```bash
+```env
 📦 MySQL Configuration
 DB_HOST=localhost
 DB_PORT=3306
