@@ -2,6 +2,7 @@
 
 This project is a secure and modern **OTP-based authentication system** built with Node.js, Express, and MySQL. It allows users to sign up, log in via **email OTP**, and reset their password using **SMS OTP**. It also includes **rate limiting**, form validation, and a clean folder structure.
 
+
 ## 💻 Features
 
 ✅ User Sign-Up with phone number  
@@ -14,6 +15,7 @@ This project is a secure and modern **OTP-based authentication system** built wi
 ✅ OTP and user data stored securely in MySQL  
 ✅ Cooldown timer displayed on frontend
 
+
 ## 🛠️ Technologies Used
 
 - HTML, CSS, JavaScript
@@ -23,6 +25,7 @@ This project is a secure and modern **OTP-based authentication system** built wi
 - Nodemailer (for email OTP)
 - API Integration for sending OTP (Twilio)
 - Dotenv (.env configuration)
+
 
 ## 📂 Project Structure
 ```bash
@@ -65,7 +68,7 @@ Project1/
 
 
 3. Set environment variables in .env:
-```env
+```bash
 📦 MySQL Configuration
 DB_HOST=localhost
 DB_PORT=3306
