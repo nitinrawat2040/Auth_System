@@ -25,7 +25,7 @@ This project is a secure and modern **OTP-based authentication system** built wi
 - Dotenv (.env configuration)
 
 ## 📂 Project Structure
-
+```bash
 Project1/
 ├── controllers/
 │ ├── authController.js
@@ -47,6 +47,7 @@ Project1/
 ├── package-lock.json
 ├── README.md
 └── server.js
+```
 
 ## 🚀 How to Run
 
@@ -57,8 +58,10 @@ Project1/
    cd Project1
    ```
 
+
 2. Install dependencies:
    npm install
+
 
 
 3. Set environment variables in .env:
@@ -87,7 +90,9 @@ TWILIO_PHONE_NUMBER=your_twilio_phone_number
 TWILIO_VERIFICATION_SERVICE_SID=your_twilio_verification_sid
 ```
 
+
 5. Run the app:
    node server.js
+
 
 6. Open http://localhost:5000 in your browser.
