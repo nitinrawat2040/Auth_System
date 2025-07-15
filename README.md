@@ -62,7 +62,7 @@ Project1/
 
 
 3. Set environment variables in .env:
-
+```env
 📦 MySQL Configuration
 DB_HOST=localhost
 DB_PORT=3306
@@ -85,7 +85,7 @@ TWILIO_ACCOUNT_SID=your_twilio_account_sid
 TWILIO_ACCOUNT_AUTH_TOKEN=your_twilio_auth_token
 TWILIO_PHONE_NUMBER=your_twilio_phone_number
 TWILIO_VERIFICATION_SERVICE_SID=your_twilio_verification_sid
-
+```
 
 5. Run the app:
    node server.js
