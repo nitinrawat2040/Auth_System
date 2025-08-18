@@ -3,8 +3,8 @@ let isOtpVerified = false;
 let cooldownInterval = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-    // Send OTP
+
+  // Send OTP
   const sendOtpBtn = document.getElementById("sendOtpBtn");
   if (sendOtpBtn) {
     sendOtpBtn.addEventListener("click", async (e) => {
@@ -35,51 +35,51 @@ document.addEventListener("DOMContentLoaded", () => {
         phoneGlobal = phone;
         isOtpVerified = false;
         otpAttempts = 0;
-         verifyOtpBtn.disabled = false;
+        verifyOtpBtn.disabled = false;
 
-          if (cooldownInterval) clearInterval(cooldownInterval);
+        if (cooldownInterval) clearInterval(cooldownInterval);
 
         const existingCooldown = document.getElementById("cooldownMsg");
-    if (existingCooldown) existingCooldown.remove();
+        if (existingCooldown) existingCooldown.remove();
 
-    verifyOtpBtn.textContent = "Verify OTP";
-    document.getElementById("otp").value = "";
+        verifyOtpBtn.textContent = "Verify OTP";
+        document.getElementById("otp").value = "";
       }
     });
   }
 
   // Verify OTP
-let otpAttempts = 0;
-const MAX_ATTEMPTS = 3;
+  let otpAttempts = 0;
+  const MAX_ATTEMPTS = 3;
 
   const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-  
+
   if (verifyOtpBtn) {
     verifyOtpBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       const otp = document.getElementById("otp").value;
 
       if (!phoneGlobal) {
-      alert("Please send OTP first.");
-      return;
+        alert("Please send OTP first.");
+        return;
       }
-       if (!otp) {
-      alert("Please enter the OTP.");
-      return;
-    }      
-const res = await fetch("http://localhost:5000/api/verify-otp", {
+      if (!otp) {
+        alert("Please enter the OTP.");
+        return;
+      }
+      const res = await fetch("http://localhost:5000/api/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: phoneGlobal, otp }),
       });
 
       const data = await res.json();
-      
+
       if (data.cooldown) {
-      disableVerifyBtn(data.retryAfter || 10); // fallback to 10 seconds
-      alert("Retry after 10 seconds");
-      return;
-    }
+        disableVerifyBtn(data.retryAfter || 10); // fallback to 10 seconds
+        alert("Retry after 10 seconds");
+        return;
+      }
 
       if (data.success) {
         isOtpVerified = true;
@@ -88,58 +88,94 @@ const res = await fetch("http://localhost:5000/api/verify-otp", {
 
         const resetBtn = document.getElementById("resetBtn");
         if (resetBtn) resetBtn.disabled = false;
-    
-      } 
-      else {
-         otpAttempts++;
-          if (otpAttempts === MAX_ATTEMPTS) {
-        alert("Too many attempts. Please wait 10 seconds.");
-        disableVerifyBtn(10); // Start 10s cooldown
-        otpAttempts = 0;
+
       }
       else {
+        otpAttempts++;
+        if (otpAttempts === MAX_ATTEMPTS) {
+          alert("Too many attempts. Please wait 10 seconds.");
+          disableVerifyBtn(10); // Start 10s cooldown
+          otpAttempts = 0;
+        }
+        else {
           alert("Wrong OTP. Try again.");
         }
-    }
+      }
     });
   }
   // Cooldown function
-function disableVerifyBtn(seconds) {
-  let timeLeft = seconds;
-  verifyOtpBtn.disabled = true;
+  function disableVerifyBtn(seconds) {
+    let timeLeft = seconds;
+    verifyOtpBtn.disabled = true;
 
-  const originalText = verifyOtpBtn.textContent;
+    const originalText = verifyOtpBtn.textContent;
 
-   if (cooldownInterval) clearInterval(cooldownInterval);
+    if (cooldownInterval) clearInterval(cooldownInterval);
 
-  // Create or use a message element to show countdown
-  let cooldownMsg = document.getElementById("cooldownMsg");
-  if (!cooldownMsg) {
-    cooldownMsg = document.createElement("p");
-    cooldownMsg.id = "cooldownMsg";
-    verifyOtpBtn.parentNode.insertBefore(cooldownMsg, verifyOtpBtn.nextSibling);
+    // Create or use a message element to show countdown
+    let cooldownMsg = document.getElementById("cooldownMsg");
+    if (!cooldownMsg) {
+      cooldownMsg = document.createElement("p");
+      cooldownMsg.id = "cooldownMsg";
+      verifyOtpBtn.parentNode.insertBefore(cooldownMsg, verifyOtpBtn.nextSibling);
+    }
+
+    // Start countdown
+    cooldownInterval = setInterval(() => {
+      const min = Math.floor(timeLeft / 60);
+      const sec = timeLeft % 60;
+      cooldownMsg.style.color = "red";
+      cooldownMsg.textContent = `Try again in ${min}:${sec < 10 ? "0" : ""}${sec}`;
+      timeLeft--;
+
+      if (timeLeft < 0) {
+        clearInterval(cooldownInterval);
+        verifyOtpBtn.disabled = false;
+        verifyOtpBtn.textContent = originalText;
+        cooldownMsg.innerHTML = `<span style="color: green;">Cooldown over. Please click 'Send OTP' again.</span>`;
+        otpAttempts = 0;
+        document.getElementById("otp").value = "";
+      }
+    }, 1000);
   }
 
-  // Start countdown
-   cooldownInterval = setInterval(() => {
-    const min = Math.floor(timeLeft / 60);
-    const sec = timeLeft % 60;
-    cooldownMsg.style.color = "red";
-    cooldownMsg.textContent = `Try again in ${min}:${sec < 10 ? "0" : ""}${sec}`;
-    timeLeft--;
+  // Verify email otp button 
+  const verifyOtpBtn2 = document.getElementById("verifyOtpBtn2");
+  if (verifyOtpBtn2) {
+    verifyOtpBtn2.addEventListener("click", async () => {
+      const otp = document.getElementById("emailotp").value;
+      const userId = localStorage.getItem("userId");
 
-    if (timeLeft < 0) {
-      clearInterval(cooldownInterval);
-      verifyOtpBtn.disabled = false;
-      verifyOtpBtn.textContent = originalText;
-      cooldownMsg.innerHTML = `<span style="color: green;">Cooldown over. Please click 'Send OTP' again.</span>`;
-      otpAttempts = 0;
-      document.getElementById("otp").value = "";
-    }
-  }, 1000);
-}
+      if (!otp || !userId) {
+        alert("Missing OTP or user info.");
+        return;
+      }
 
-// Login
+      try {
+        const response = await fetch("http://localhost:5000/api/verify-email-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ identifier: userId, otp })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("OTP Verified! Login successful.");
+          // Redirect to dashboard or home
+          window.location.href = "https://www.linkedin.com/in/nitin-singh-rawat-9594b228b";
+        } else {
+          alert(data.message || "Invalid OTP.");
+        }
+      } catch (error) {
+        console.error("OTP verification error:", error);
+        alert("Something went wrong!");
+      }
+    });
+  }
+
+
+  // Login
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
@@ -158,9 +194,7 @@ function disableVerifyBtn(seconds) {
         const data = await response.json();
 
         if (response.ok) {
-          alert("Login successful!");
-          localStorage.setItem("token", data.token);
-          window.location.href = "https://www.linkedin.com/in/nitin-singh-rawat-9594b228b";
+          window.location.href = "https://iisppr.in/";
         } else {
           alert(data.message);
         }
@@ -172,9 +206,9 @@ function disableVerifyBtn(seconds) {
   }
 
 
-// Signup click button 
-    const signUpBtn = document.getElementById('SignUp');
-    if(signUpBtn) {
+  // Signup click button 
+  const signUpBtn = document.getElementById('SignUp');
+  if (signUpBtn) {
     signUpBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       console.log("✅ Button Clicked");
@@ -206,81 +240,81 @@ function disableVerifyBtn(seconds) {
         alert(result.message || result.error);
 
         if (result.success) {
-        setTimeout(() => {
-        window.location.href = "login.html";  
-      }, 1000);
-    }
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1000);
+        }
       } catch (err) {
         console.error("❌ Error in request:", err);
         alert("Something went wrong");
       }
     });
-    }
+  }
 
   //Reset Button
   const resetBtn = document.getElementById("resetBtn");
   if (resetBtn) {
-     resetBtn.disabled = true;
-  resetBtn.addEventListener("click", (e) => {
-     e.preventDefault();
+    resetBtn.disabled = true;
+    resetBtn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    if (!isOtpVerified) {
-      alert("Please verify OTP before resetting password.");
-      return;
-    }
-    const numberInput = document.getElementById("number");
-    const otpInput = document.getElementById("otp");
+      if (!isOtpVerified) {
+        alert("Please verify OTP before resetting password.");
+        return;
+      }
+      const numberInput = document.getElementById("number");
+      const otpInput = document.getElementById("otp");
 
-    if (!numberInput || !otpInput) {
-      alert("Phone number and OTP are required!")
-      return;
-    }
+      if (!numberInput || !otpInput) {
+        alert("Phone number and OTP are required!")
+        return;
+      }
 
-    alert("Reset password successfully!");
-    document.getElementById("passwordSection").style.display = "block";
-    document.getElementById("resetBtn").style.display = "none";
-  });
-}
-
-
-// Change password button
-const changeBtn = document.getElementById("changePasswordBtn");
-if (changeBtn) {
-  changeBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const newPassword = document.getElementById("new_password").value;
-    const confirmPassword = document.getElementById("confirm_password").value;
-
-    if (!isOtpVerified || !phoneGlobal) {
-      alert("Please verify OTP first.");
-      return;
-    }
-
-    if (!newPassword || !confirmPassword) {
-      alert("Both password fields are required.");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-
-    const res = await fetch("http://localhost:5000/api/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: phoneGlobal, newPassword }),
+      alert("Reset password successfully!");
+      document.getElementById("passwordSection").style.display = "block";
+      document.getElementById("resetBtn").style.display = "none";
     });
+  }
 
-    const data = await res.json();
-    alert(data.message);
 
-    if (data.success) {
-      window.location.href = "login.html";
-    }
-    numberInput.value = "";
-    otpInput.value = "";
-  });
-}
+  // Change password button
+  const changeBtn = document.getElementById("changePasswordBtn");
+  if (changeBtn) {
+    changeBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const newPassword = document.getElementById("new_password").value;
+      const confirmPassword = document.getElementById("confirm_password").value;
+
+      if (!isOtpVerified || !phoneGlobal) {
+        alert("Please verify OTP first.");
+        return;
+      }
+
+      if (!newPassword || !confirmPassword) {
+        alert("Both password fields are required.");
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      const res = await fetch("http://localhost:5000/api/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: phoneGlobal, newPassword }),
+      });
+
+      const data = await res.json();
+      alert(data.message);
+
+      if (data.success) {
+        window.location.href = "login.html";
+      }
+      numberInput.value = "";
+      otpInput.value = "";
+    });
+  }
 
 });

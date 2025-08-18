@@ -6,7 +6,6 @@ This project is a secure and modern **OTP-based authentication system** built wi
 ## 💻 Features
 
 ✅ User Sign-Up with phone number  
-✅ Login with **email-based OTP**  
 ✅ Password Reset with **SMS OTP**  
 ✅ Rate limiting with cooldown timer (stored in DB)  
 ✅ Secure password hashing using bcrypt  

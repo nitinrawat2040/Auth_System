@@ -3,8 +3,7 @@ const router = express.Router();
 const rateLimit = require('express-rate-limit');
 
 const { sendOtp, verifyOtp } = require('../controllers/otpController');
-const { signUp, loginUser } = require('../controllers/authController');
-const { resetPassword } = require('../controllers/authController');
+const { signUp, loginUser, resetPassword, verifyEmailOtp } = require('../controllers/authController');
 
 // Rate limiting route
 const verifyOtpLimiter = rateLimit({
@@ -21,17 +20,20 @@ const verifyOtpLimiter = rateLimit({
 // OTP routes
 router.post('/send-otp', sendOtp);
 
+// Apply rate limiter to the OTP verification route
+router.post('/verify-otp', verifyOtp);
+// router.post('/verify-otp', verifyOtpLimiter, verifyOtp);
+
 // Signup route
 router.post('/signup', signUp);
 
 // Login route
 router.post('/login', loginUser);
 
+//
+router.post('/verify-email-otp', verifyEmailOtp);
+
 //Reset password route
 router.post("/reset-password", resetPassword);
-
-// Apply rate limiter to the OTP verification route
-router.post('/verify-otp', verifyOtp);
-// router.post('/verify-otp', verifyOtpLimiter, verifyOtp);
 
 module.exports = router;
